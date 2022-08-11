@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <link rel="stylesheet" href="style.css">
+        <title>Rubik Scrambler</title>
+    </header>
+    <body id="main">
+        <form id="Form" action="#" onsubmit="scramble(); return false">
+            <div>
+                Size: <br>
+                <input type="radio" id="third" name="third" checked="checked" value="3">
+                <label for="3x3">3x3</label><br>
+            </div>
+            <div>
+                Length:<br>
+                <input type="number" id="length" value="" min="10" max="9001">
+            </div>
+            <input type="submit">
+        </form>
+        <div>
+            <button id="backgroundButton" onclick="backgroundChange()">Light Mode</button>
+        </div>
+        <div>
+            <p class="moves" id="move">Moves:</p>
+        </div>
+    </body>
+    <script src="index.js"></script>
+    <footer class="dontSelect">©️ Nathan Comedics Ltd.<br>©️ Nathan Comedics Ltd. Digital Dept.</footer>
+</html>

@@ -1,0 +1,29 @@
+.moves {
+    font-family: Arial;
+    background-color: grey;
+    font-size: 1cm;
+}
+form {
+    font-size: .75cm;
+}
+input {
+    height: .75cm;
+}
+body {
+    color: white;
+    background-color: black;
+}
+footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    font-size: 2.5mm;
+}
+.dontSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

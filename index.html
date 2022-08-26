@@ -1,29 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-    <header>
+<html>
+    <head>
         <link rel="stylesheet" href="style.css">
         <title>Rubik Scrambler</title>
-    </header>
+        <link rel="icon" type="icon/x-icon" href="Logos.png">
+    </head>
     <body id="main">
         <form id="Form" action="#" onsubmit="scramble(); return false">
-            <div>
+            <div id="sizeMatters">
                 Size: <br>
-                <input type="radio" id="third" name="third" checked="checked" value="3">
-                <label for="3x3">3x3</label><br>
+                <input type="radio" id="2" name="size" checked="checked" value="2" onchange="sizeCheck()">
+                <label for="s2">2x2</label><br>
+                <input type="radio" id="3" name="size" value="3" onchange="sizeCheck()">
+                <label for="s3">3x3</label><br>
             </div>
             <div>
-                Length:<br>
-                <input type="number" id="length" value="" min="10" max="9001">
+                <div id="extra">
+                    <p style="font-size: .5cm; margin: 0; text-align: center;">Extra Options:</p><br>
+                    <input type="checkbox" id="cubeRo" onclick="extrasUpdate()">
+                    <label for="cubeRo">Cube Rotations</label><br><br>
+                    <div class="addon" id="cubeRotate">
+                        <label for="rCh">Cube Rotate Chance (1/X):</label><br>
+                        <input type="number" id="rCh" min="2" value="8">
+                    </div><br>
+                    <input type="checkbox" id="cubeEx" onclick="extrasUpdate()">
+                    <label for="cubeEx">Cube Extras (e.g. M, E, S, Rw, etc.)</label><br><br>
+                    <div class="addon" id="cubeExtras">
+                        <label for="eCh">Cube Extra Chance (1/X):</label><br>
+                        <input type="number" id="eCh" value="8">
+                    </div>
+                </div>
+                <label for="length">Length:</label><br>
+                <input type="number" id="length" min="10" required><br><br>
+                <label for="dCh">Chance of Double (1/X):</label><br>
+                <input type="number" id="dCh" value="2" required><br><br>
+                <label for="dCh">Chance of Prime (1/X):</label><br>
+                <input type="number" id="pCh" value="4" required>
             </div>
+            <br>
             <input type="submit">
         </form>
         <div>
-            <button id="backgroundButton" onclick="backgroundChange()">Light Mode</button>
-        </div>
-        <div>
-            <p class="moves" id="move">Moves:</p>
+            <p id="moves">Moves:<span id="move" translate="no"></span></p>
+            <div id="proggers">
+                <p id="done">Done:</p>
+                <p id="total" style="padding-left: 2mm;">Total:</p>
+            </div>
         </div>
     </body>
     <script src="index.js"></script>
+    <div>
+        <button id="backgroundButton" onclick="backgroundChange()">Light Mode</button>
+    </div>
     <footer class="dontSelect">©️ Nathan Comedics Ltd.<br>©️ Nathan Comedics Ltd. Digital Dept.</footer>
 </html>

@@ -1,15 +1,27 @@
-.moves {
+p {
     font-family: Arial;
     background-color: grey;
     font-size: 1cm;
+    overflow: auto;
+    max-height: 35vh;
 }
 form {
-    font-size: .75cm;
+    overflow: auto;
+    font-size: 5mm;
+    max-height: 55vh;
+    border: solid;
+    border-color: grey;
+    border-radius: 15px;
+    padding: 2mm;
 }
 input {
     height: .75cm;
 }
+input[type="number"] {
+    width: 3cm;
+}
 body {
+    font-family: "Times New Roman";
     color: white;
     background-color: black;
 }
@@ -26,4 +38,40 @@ footer {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+button {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+}
+button:hover {
+    cursor: pointer;
+}
+input[type="radio"]:hover {
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    cursor: pointer;
+}
+#extra {
+    float: right;
+    display: none;
+    width: 35vw;
+    text-align: left;
+    margin-bottom: 2mm;
+}
+#done, #total {
+    font-size: .75cm;
+}
+input[type="checkbox"] {
+    width: 20px;
+    height:20px;
+}
+input[type="checkbox"]:hover {
+    -webkit-box-shadow: 0px 0px 0px 1px rgba(0,0,0,5);
+    box-shadow: 0px 0px 0px 1px rgba(0,0,0,5);
+    cursor: pointer;
+}
+.addon {
+    display: none;
 }

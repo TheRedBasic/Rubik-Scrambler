@@ -1,11 +1,14 @@
+//Variables are started for almost every function to work
 var form = document.getElementById('Form'), length = 0, Prime, Double, count = 0, size, previous = '', Move = '', Chosen = ''
 var moveText = document.getElementById('move'), backgroundColor = document.getElementById('main'), backgroundText = document.getElementById('main'), backgroundButton = document.getElementById('backgroundButton')
-var backgroundState = 0, id = null, timerId = null, extraDeclare, letRo = false, letEx = false
+var backgroundState = 0, id = null, timerId = null, extraDeclare, letRo = false, letEx = false, truePre = ""
 var moveFont = document.getElementById("move")
 var cubeRotate = false, cubeExtras = false, dCh, pCh, moveMain = document.getElementById('moves')
+//This just reduces keys pressed to just reduce errors for many aspects
 function randInt(max) {
     return Math.floor(Math.random() * max) + 1
 }
+//Makes the final deciding factor for every size, small and simple
 function randomChoice(Chars) {
     if (typeof Chars == String) {
         Chars = Chars.split('')
@@ -13,6 +16,7 @@ function randomChoice(Chars) {
     let index = Math.floor(Math.random() * Chars.length)
     return Chars[index]
 }
+//Main scrambler with basic rules to stop opposite/same face moves
 function regularMoveGen() {
     if (previous == 'U' || previous == 'D') {
         Move = 'FBLR'
@@ -24,6 +28,7 @@ function regularMoveGen() {
         Move = 'UDFBLR'
     }
     Chosen = randomChoice(Move)
+    console.log(Chosen + "-" + count)
     previous = Chosen
     Double = document.getElementById("dCh").value
     Prime = document.getElementById("pCh").value
@@ -42,12 +47,13 @@ function regularMoveGen() {
     }else if (pCh == Prime && Prime > 0) {
         Chosen += "'"
     }
-    console.log(Chosen)
     return Chosen
 }
+//Simple move genorator, with steroids for larger sizes
 function xyzMoveGen() {
     extraDeclare = false
     var Rotate = document.getElementById("rCh").value
+    //Familiar?
     var loadedMove = regularMoveGen()
     if (document.getElementById("cubeRo").checked == true) {
         if (randInt(Rotate) == Rotate && ("X" != previous && "Y" != previous && "Z" != previous) && letRo == true) {
@@ -66,6 +72,7 @@ function xyzMoveGen() {
     }
     return loadedMove
 }
+//Size 2x2 cube scrambler, the basic of basics, made before the 3x3 when I didn't know how much JavaBS I would have to deal with
 function s2() {
     if (count == length) {
         timerId = setTimeout(progDel, 30000)
@@ -78,6 +85,7 @@ function s2() {
         document.getElementById('done').textContent = "Done: " + count
     }
 }
+//Size 3x3 cube scrambler, if (you.haveNoClue.onHowThisWorks() == true) {console.log("Me too kid, me too.")}
 function s3() {
     if (count == length) {
         timerId = setTimeout(progDel, 30000)
@@ -98,7 +106,31 @@ function s3() {
             if (eCh == Extra && !extraDeclare && letEx == true) {
                 letEx = false
                 if (randInt(2) == 1) {
-                    loadedMove = randomChoice("MES")
+                    let Move = []
+                    if (truePre == 'U' || truePre == 'D') {
+                        Move.push("E")
+                    }
+                    if (truePre == 'F' || truePre == 'B') {
+                        Move.push("S")
+                    }
+                    if (truePre == 'L' || truePre == 'R') {
+                        Move.push("M")
+                    }
+                    let posMove = new Set(["M", "E", "S"])
+                    for (let x = 0; x < Move.length; x++) {
+                        if (posMove.has(Move[x])) {
+                            posMove.delete(Move[x])
+                        }
+                    }
+                    if (Move.length < 1) {alert ("Fuck!")}
+                    loadedMove = randomChoice((Array.from(posMove)).join(''))
+                    if (loadedMove == "M") {
+                        previous = "R"
+                    }else if (loadedMove == "E") {
+                        previous = "D"
+                    }else if (loadedMove == "S") {
+                        previous = "B"
+                    }
                     if (dCh == Double && Double > 0) {
                         loadedMove += 2
                     }else if (pCh == Prime && Prime > 0) {
@@ -117,10 +149,12 @@ function s3() {
             }
         }
         moveText.textContent += ' ' + loadedMove
+        truePre = loadedMove.split('')[0]
         moveText.scrollTop = moveText.scrollHeight
         document.getElementById('done').textContent = "Done: " + count
     }
 }
+//Scrambling prep handler, it's whats called when you enter the form
 function scramble() {
     document.getElementById("proggers").style.display = "block"
     console.clear()
@@ -138,11 +172,13 @@ function scramble() {
     }
     sizeScrambleStart()
 }
+//Creates random numbers for the main values when called
 function valueSelect() {
     document.getElementById('length').value = Math.floor(Math.random() * 21) + 10
     document.getElementById('dCh').value = randInt(7) + 1
     document.getElementById('pCh').value = randInt(5) + 3
 }
+//Button handler for the Dark/Light mode switcher, easy and small
 function backgroundChange() {
     if (backgroundState == 1) {
         console.log('Changing Background to Dark Mode!')
@@ -158,10 +194,12 @@ function backgroundChange() {
         backgroundState = 1
     }
 }
+//When scrambling there is a live progress report for how much scrambling is done, when the scrambling is complete there is 30 seconds before hiding it from the screen
 function progDel() {
     document.getElementById("proggers").style.display = "none"
     console.log("Begone THOT!!!")
 }
+//Loaded upon startup to whow what goes where
 function startFunct() {
     if (loadCheck == 0) {
         sizeCheck()
@@ -170,6 +208,7 @@ function startFunct() {
         loadCheck = 1
     }
 }
+//Just updates the form and size value when another size is selected
 function sizeCheck() {
     size = parseInt(document.querySelector('input[type="radio"]:checked').value)
     if (size > 2) {
@@ -181,6 +220,7 @@ function sizeCheck() {
         extrasUpdate()
     }
 }
+//This shows/hides extra values depending on what extra options are available
 function extrasUpdate() {
     if (document.getElementById("cubeRo").checked == true) {
         document.getElementById("cubeRotate").style.display = "block"
@@ -201,6 +241,7 @@ function extrasUpdate() {
         cubeRotate = false
     }
 }
+//This is what calls the sized scrambling, changes based on what sized is selected
 function sizeScrambleStart() {
     if (size == 2) {
         id = setInterval(s2, 1)
@@ -210,5 +251,6 @@ function sizeScrambleStart() {
     document.getElementById("moves").textContent = "Size is not supported!"    
     }
 }
+//Finishing touches to show the product of this hellscape I call "Programming"
 var loadCheck = 0
 document.getElementById("main").addEventListener("load", startFunct())

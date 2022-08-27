@@ -54,11 +54,12 @@ input[type="submit"]:hover {
     cursor: pointer;
 }
 #extra {
-    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
     display: none;
     width: 35vw;
     text-align: left;
-    margin-bottom: 2mm;
 }
 #done, #total {
     font-size: .75cm;

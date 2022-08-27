@@ -14,7 +14,15 @@
                 <input type="radio" id="3" name="size" value="3" onchange="sizeCheck()">
                 <label for="s3">3x3</label><br>
             </div>
-            <div>
+            <div style="position: relative;">
+                <div id="mForm">
+                    <label for="length">Length:</label><br>
+                    <input type="number" id="length" min="10" required><br><br>
+                    <label for="dCh">Chance of Double (1/X):</label><br>
+                    <input type="number" id="dCh" value="2" required><br><br>
+                    <label for="dCh">Chance of Prime (1/X):</label><br>
+                    <input type="number" id="pCh" value="4" required>
+                </div>
                 <div id="extra">
                     <p style="font-size: .5cm; margin: 0; text-align: center;">Extra Options:</p><br>
                     <input type="checkbox" id="cubeRo" onclick="extrasUpdate()">
@@ -30,12 +38,6 @@
                         <input type="number" id="eCh" value="8">
                     </div>
                 </div>
-                <label for="length">Length:</label><br>
-                <input type="number" id="length" min="10" required><br><br>
-                <label for="dCh">Chance of Double (1/X):</label><br>
-                <input type="number" id="dCh" value="2" required><br><br>
-                <label for="dCh">Chance of Prime (1/X):</label><br>
-                <input type="number" id="pCh" value="4" required>
             </div>
             <br>
             <input type="submit">

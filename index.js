@@ -122,7 +122,6 @@ function s3() {
                             posMove.delete(Move[x])
                         }
                     }
-                    if (Move.length < 1) {alert ("Fuck!")}
                     loadedMove = randomChoice((Array.from(posMove)).join(''))
                     if (loadedMove == "M") {
                         previous = "R"
